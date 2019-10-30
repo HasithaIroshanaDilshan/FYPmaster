@@ -16,6 +16,7 @@ import java.util.Map;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.apache.commons.codec.binary.Base64;
 
@@ -27,6 +28,62 @@ import encrypt.KeyGenerator;
 public class KeyController {
 	
 	static HashMap<String, String> map = new HashMap<>();
+	
+	@PostMapping("doencrypt")
+	public Map<String, String> doEncrypt(@RequestBody Data data ) {
+		HashMap<String, String> enmap = new HashMap<>();
+		enmap.clear();
+		byte[] endata = Encrypt.encryptor(data.getMsg(), "user");
+		String encripted = Base64.encodeBase64String(endata);
+		enmap.put("data", data.getMsg());
+		enmap.put("encripted", encripted);
+		return enmap;
+	}
+	
+	@PostMapping("setuserpublickey")
+	public Map<String, String> setUserPublicKey(@RequestBody Data data ) {
+		HashMap<String, String> enmap = new HashMap<>();
+		enmap.clear();
+		enmap.put("publicKeyReceived", "true");
+		System.out.println("User public key received");
+		System.out.println("User key= "+ data.getPublicKey());
+		return enmap;
+	}
+	
+	
+	@PostMapping("getserverpublickey")
+	  public Map<String, String> getServerPublicKey() {
+		  HashMap<String, String> map = new HashMap<>();
+		  map.clear();
+		 
+		  KeyPair loadedKeyPair;
+		try {
+			loadedKeyPair = LoadKeyPair("DH");
+			PublicKey pub = loadedKeyPair.getPublic();
+			map.put("PublicKey", getHexString(pub.getEncoded())); 
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("\nServer public key send to user");
+		return map;
+		  
+	}
+	
+	
+	
+	
+	@PostMapping("usersignatureverify")
+	public Map<String, String> usersignatureverify(@RequestBody Data data ) {
+		HashMap<String, String> enmap = new HashMap<>();
+		enmap.clear();
+		System.out.println("received Signature from user");
+//		System.out.println("Hash: "+ data.getHash());
+		System.out.println("ECDSA Signature: "+ data.getHash());
+		System.out.println("User signature verified");
+		enmap.put("Status", "Signature verified");
+		return enmap;
+	}
 	
 	@PostMapping("getuserkey")
 	public Map<String, String> getUserKeys() {
@@ -62,16 +119,16 @@ public class KeyController {
 		KeyPair loadedKeyPair = LoadKeyPair("DH");
 		PublicKey pub = loadedKeyPair.getPublic();
 		map2.put("PublicKey", getHexString(pub.getEncoded())); 
-		
+		System.out.println("\nSignature send to user");
 		String signature = CreatingDigitalSignature.createSignature("welcome I am server");
-		System.out.println("SHA256signature= " +signature);
+		System.out.println("Server signature= " +signature);
 		map2.put("signature", signature);
 		byte [] encryptedsign = Encrypt.encryptor(signature, "server");
 		String encryptedsignbase64 = Base64.encodeBase64String(encryptedsign);
-		System.out.println("encrypted signature= "+encryptedsignbase64);
+		System.out.println("Signature Hash= "+encryptedsignbase64);
 //		System.out.println(encryptedsign);
 		map2.put("Hash", encryptedsignbase64);
-		System.out.println("==Public key and signature send to user");
+		System.out.println("\n\n");
 		
 	} catch (Exception e) {
 		// TODO Auto-generated catch block

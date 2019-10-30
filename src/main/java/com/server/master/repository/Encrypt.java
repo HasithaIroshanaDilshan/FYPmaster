@@ -35,13 +35,8 @@ public class Encrypt {
 
         try{
             String path = "";
-                if(usage == "user"){
-                    path = "D:\\FYP\\user";
-                }else {
-                    path = "D:\\FYP\\server";
-                }
-
-
+            if(usage == "user")path = "D:\\FYP\\user";
+            else path = "D:\\FYP\\server";
             File filePublicKey = new File(path+"\\public.key");
             FileInputStream fis = new FileInputStream(path+"\\public.key");
             byte[] encodedPublicKey = new byte[(int) filePublicKey.length()];

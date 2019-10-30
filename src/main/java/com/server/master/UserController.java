@@ -30,11 +30,20 @@ public class UserController {
 	
 	@PostMapping("login")
 	public @ResponseBody String login(@RequestBody User loginData) {
+		System.out.println("\n\nLogin request");
+		
 		String username = loginData.getUsername();
 		String password = loginData.getPassword();
+		System.out.println("username= "+username);
+		System.out.println("password= "+ password);
 		User u = userRepository.findUser(username, password);
-		if(u == null)
+		
+		if(u == null) {
+			System.out.println("User not registered");
 			return "false";
-		return u.getEmail();
+		}else {
+			System.out.println("logged in : " + u.getEmail());
+			return u.getEmail();
+		}
 	}
 }

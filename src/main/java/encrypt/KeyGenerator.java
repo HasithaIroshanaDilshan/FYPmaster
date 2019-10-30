@@ -26,9 +26,7 @@ private static String publickeyPath = "";
                 publickeyPath = "D:\\FYP\\user";
             }
             //String path = "D:\\FYP";
-
             KeyPairGenerator keyGen = KeyPairGenerator.getInstance("DH");
-
             keyGen.initialize(1024);
             KeyPair generatedKeyPair = keyGen.genKeyPair();
 
