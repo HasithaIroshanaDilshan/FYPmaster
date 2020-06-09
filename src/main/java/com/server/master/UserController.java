@@ -1,5 +1,8 @@
 package com.server.master;
 
+import java.lang.reflect.Method;
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,12 +11,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.server.master.repository.KeystrokedataRepository;
 import com.server.master.repository.UserRepository;
+
 
 @RestController
 public class UserController {
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private KeystrokedataRepository keystrokedataRepository;
 	
 	@RequestMapping("users")
 	public @ResponseBody User getUsers(@RequestParam Integer Id) {
@@ -43,7 +50,80 @@ public class UserController {
 			return "false";
 		}else {
 			System.out.println("logged in : " + u.getEmail());
+//			System.out.println("keystorkeTimes : " + Arrays.toString(loginData.getKeystorkeTimes()));
+//			User.keyDataset(loginData.getKeystorkeTimes());
+			saveKeystorkedata(loginData.getKeystorkeTimes(), u);
 			return u.getEmail();
 		}
 	}
+	
+	
+	public void saveKeystorkedata(String[] keystorkeTimes, User u) {
+		Integer userId = u.getId();
+		
+//        try {
+//        	String keydataClassName = "com.server.master.Keystrokedata";
+//            Class<?> keydataClass = Class.forName(keydataClassName); // convert string classname to class
+//			Object keydata = keydataClass.newInstance();
+//		} catch (InstantiationException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} // invoke empty constructor
+		
+        Keystrokedata keydata = new Keystrokedata();
+        keydata.setUserId(userId);
+		
+		int passwordLength = keystorkeTimes.length/2;
+		System.out.println("keystorkeTimes : " + Arrays.toString(keystorkeTimes));
+		
+		for(int i=0; i<passwordLength;i++) {
+			String[] parts = keystorkeTimes[i*2+1].split(":");
+			float keyup = Float.parseFloat(keystorkeTimes[i*2+1].split(":")[1]);
+			float keydown = Float.parseFloat(keystorkeTimes[i*2].split(":")[1]);
+			float keydownNxt = Float.parseFloat(keystorkeTimes[i*2+2].split(":")[1]);
+			
+			
+			
+			try {
+				Method setNameMethod;
+				
+				//Hold period
+				String methodName  = "setH_period_"+(i+1);
+				float Hperiod = (keyup - keydown)/100;
+				System.out.printf("%s : %f \n",methodName, Hperiod);
+				setNameMethod = keydata.getClass().getMethod(methodName, float.class);
+				setNameMethod.invoke(keydata, Hperiod); // pass arg
+			
+	        
+				//down to down period
+				methodName  = "setDD_period_"+(i+1);
+				float ddPeriod = (keydownNxt - keydown)/1000;
+				System.out.printf("%s : %f \n",methodName, ddPeriod);
+				setNameMethod = keydata.getClass().getMethod(methodName, float.class);
+				setNameMethod.invoke(keydata, ddPeriod); // pass arg
+			
+			
+				//up to down latency
+				methodName  = "setUD_period_"+(i+1);
+				float udPeriod = (keydownNxt - keyup)/1000;
+				System.out.printf("%s : %f \n",methodName, udPeriod);
+				setNameMethod = keydata.getClass().getMethod(methodName, float.class);
+				setNameMethod.invoke(keydata, udPeriod); // pass arg
+			} catch (NoSuchMethodException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
+		
+		keystrokedataRepository.save(keydata);
+	}
+	
 }

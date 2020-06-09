@@ -1,5 +1,7 @@
 package com.server.master;
 
+import java.util.Arrays;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +15,7 @@ public class User {
 	private String username;
 	private String password;
 	private String email;
+	private String[] keystorkeTimes;
 	
 	
 	public User() {
@@ -42,6 +45,35 @@ public class User {
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public String[] getKeystorkeTimes() {
+		return keystorkeTimes;
+	}
+	public void setKeystorkeTimes(String[] keystorkeTimes) {
+		this.keystorkeTimes = keystorkeTimes;
+	}
+	
+	public static void keyDataset(String[] keystorkeTimes) {
+		int passwordLength = keystorkeTimes.length/2;
+		System.out.println("keystorkeTimes : " + Arrays.toString(keystorkeTimes));
+		for(int i=0; i<passwordLength;i++) {
+			System.out.println("keystorkeTime : "+keystorkeTimes[i*2+1]);
+			String[] parts = keystorkeTimes[i*2+1].split(":");
+			System.out.println("parts0: "+ parts[0]);
+			System.out.printf("parts1: %f\n",  Float.parseFloat(parts[1]));
+			
+			
+			
+			float keyup = Float.parseFloat(keystorkeTimes[i*2+1].split(":")[1]);
+			System.out.printf("keyup : %f %d\n",keyup,i*2+1);
+			float keydown = Float.parseFloat(keystorkeTimes[i*2].split(":")[1]);
+			System.out.printf("keydown : %f %d\n",keydown,i*2);
+			
+			float Hperiod = (keyup - keydown);
+			System.out.printf("Hperiod : %f \n",Hperiod);
+			System.out.printf("Hperiod : %f \n",Hperiod/1000);
+		}
+		
 	}
 	
 	

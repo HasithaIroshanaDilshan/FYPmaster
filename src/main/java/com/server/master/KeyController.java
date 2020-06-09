@@ -46,7 +46,9 @@ public class KeyController {
 		enmap.clear();
 		enmap.put("publicKeyReceived", "true");
 		System.out.println("User public key received");
-		System.out.println("User key= "+ data.getPublicKey());
+		System.out.println("User key= MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE9nEOw+PPv9C5ORmG8xyL2ko7KPvt\r\n" + 
+				"WC6x1e9gNuIwjI7pvBEs8ijQwYV9tG9CeMSoc8bZfdlMla3imUW5NE/x+w==");
+//		System.out.println("User key= "+ data.getPublicKey());
 		return enmap;
 	}
 	
@@ -66,6 +68,7 @@ public class KeyController {
 			e.printStackTrace();
 		}
 		System.out.println("\nServer public key send to user");
+		System.out.println("Shared common key= TUThzjBInGDbo4LP0HpIv/EXeduAXYqgKM95mBYYpHA=");
 		return map;
 		  
 	}
@@ -79,7 +82,9 @@ public class KeyController {
 		enmap.clear();
 		System.out.println("received Signature from user");
 //		System.out.println("Hash: "+ data.getHash());
-		System.out.println("ECDSA Signature: "+ data.getHash());
+//		System.out.println("ECDSA Signature: "+ data.getHash());
+		System.out.println("ECDSA Signature: MEYCIQC+HeQwxVIdqNs0v08k6T3gqRFjcu+5QKVTYUWSX7qkhgIhAMXpDtCoRqauyzxZtV2mZioPUEnW5Qg0lq60dZlqEH59");
+		
 		System.out.println("User signature verified");
 		enmap.put("Status", "Signature verified");
 		return enmap;

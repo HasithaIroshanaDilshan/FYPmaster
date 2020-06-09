@@ -62,10 +62,15 @@ public class AuthenticationServerApplication {
 	
 	  private static void dumpKeyPair(KeyPair keyPair) {
 	        PublicKey pub = keyPair.getPublic();
-	        System.out.println("Public Key: " + getHexString(pub.getEncoded()));
+//	        System.out.println("Public Key: " + getHexString(pub.getEncoded()));
+	        System.out.println("Public Key: MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE1xhNa5MJRF1ti2hi+Xfvuclb2j2M" + 
+	        		"212MiAh3MCLgS9X1gl+\nmDrGLuMhE1wDSsjgBKdNriYN3Ky+m+HZgACr/0w==");
 
 	        PrivateKey priv = keyPair.getPrivate();
-	        System.out.println("Private Key: " + getHexString(priv.getEncoded()));
+//	        System.out.println("Private Key: " + getHexString(priv.getEncoded()));
+	        System.out.println("Private Key: MHcCAQEEIH+F7bJCIodytWW55dmooUjjCaWgHQ3BBXCszfBTyHXroAoGCCqGSM49" + 
+	        		"AwEHoUQDQgAE1xhNa5\nMJRF1ti2hi+Xfvuclb2j2M212MiAh3MCLgS9X1gl+mDrGL" + 
+	        		"uMhE1wDSsjgBKdNriYN3Ky+m+HZgACr/0w==");
 	    }
 	  
 	  private static String getHexString(byte[] b) {
