@@ -15,7 +15,10 @@ public class User {
 	private String username;
 	private String password;
 	private String email;
+	private String userAgent;
+	private String device;
 	private String[] keystorkeTimes;
+	private String pw;
 	
 	
 	public User() {
@@ -74,6 +77,30 @@ public class User {
 			System.out.printf("Hperiod : %f \n",Hperiod/1000);
 		}
 		
+	}
+
+	public String getUserAgent() {
+		return userAgent;
+	}
+
+	public void setUserAgent(String userAgent) {
+		this.userAgent = userAgent;
+	}
+
+	public String getDevice() {
+		return device;
+	}
+
+	public void setDevice(String device) {
+		this.device = device;
+	}
+
+	public String getPw() {
+		return pw;
+	}
+
+	public void setPw(String pw) {
+		this.pw = pw;
 	}
 	
 	
