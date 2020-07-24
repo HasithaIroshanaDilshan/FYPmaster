@@ -1,4 +1,4 @@
-package encrypt;
+package com.server.master.encrypt;
 
 /* Code for Generating key Pair */
 import java.io.*;

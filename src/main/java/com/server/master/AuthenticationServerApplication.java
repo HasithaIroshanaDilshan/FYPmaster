@@ -14,10 +14,10 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import com.server.master.repository.Decrypt;
-import com.server.master.repository.Encrypt;
+//import com.server.master.repository.Decrypt;
+//import com.server.master.repository.Encrypt;
 
-import encrypt.KeyGenerator;
+import com.server.master.encrypt.KeyGenerator;
 
 
 @SpringBootApplication
@@ -39,7 +39,7 @@ public class AuthenticationServerApplication {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(AuthenticationServerApplication.class, args);
-		
+		System.out.println("Master server started");
 		KeyPair keypair = KeyGenerator.generateKeys("server");
 		
 		if(showKey)

@@ -21,8 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.apache.commons.codec.binary.Base64;
 
 import com.server.master.repository.Encrypt;
+//import com.server.master.Data;
 
-import encrypt.KeyGenerator;
+import com.server.master.encrypt.KeyGenerator;
 
 @RestController
 public class KeyController {

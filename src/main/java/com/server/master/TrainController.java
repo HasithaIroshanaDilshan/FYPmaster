@@ -56,8 +56,8 @@ public class TrainController {
 		System.out.println("password= "+ password);
 		User u = userRepository.findUser(username, password);
 		if(u == null) {
-			System.out.println("User not registered");
-			return "User not registered";
+			System.out.println("wrong password");
+			return "wrong password";
 		}else {
 			System.out.println("logged in : " + u.getEmail());
 			loginData.setEmail(u.getEmail());
@@ -184,7 +184,7 @@ public class TrainController {
 			//Hold period
 			String methodName  = "setH_period_"+(i+1);
 			Hperiod = (keyup - keydown)/1000;
-			System.out.printf("%s : %f \n",methodName, Hperiod);
+			System.out.printf("%s : %.3f ms\n",methodName, Hperiod);
 			setNameMethod = keydata.getClass().getMethod(methodName, float.class);
 			setNameMethod.invoke(keydata, Hperiod); // pass arg
 			keystrokeData[i*3] = Hperiod;
@@ -192,7 +192,7 @@ public class TrainController {
 			//down to down period
 			methodName  = "setDD_period_"+(i+1);
 			ddPeriod = (keydownNxt - keydown)/1000;
-			System.out.printf("%s : %f \n",methodName, ddPeriod);
+			System.out.printf("%s : %.3f ms\n",methodName, ddPeriod);
 			setNameMethod = keydata.getClass().getMethod(methodName, float.class);
 			setNameMethod.invoke(keydata, ddPeriod); // pass arg
 			keystrokeData[i*3+1] = ddPeriod;
@@ -200,7 +200,7 @@ public class TrainController {
 			//up to down latency
 			methodName  = "setUD_period_"+(i+1);
 			udPeriod = (keydownNxt - keyup)/1000;
-			System.out.printf("%s : %f \n",methodName, udPeriod);
+			System.out.printf("%s : %.3f ms\n",methodName, udPeriod);
 			setNameMethod = keydata.getClass().getMethod(methodName, float.class);
 			setNameMethod.invoke(keydata, udPeriod); // pass arg
 			keystrokeData[i*3+2] = udPeriod;

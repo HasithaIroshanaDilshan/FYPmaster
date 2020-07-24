@@ -1,7 +1,7 @@
 package com.server.master.repository;
 
 import org.apache.commons.codec.binary.Base64;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
+//import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyAgreement;
@@ -25,7 +25,7 @@ public class Decrypt {
  
 
     public static String decryptor(String encodedData, String usage){
-        Security.addProvider(new BouncyCastleProvider());
+//        Security.addProvider(new BouncyCastleProvider());
 
         try{
 
