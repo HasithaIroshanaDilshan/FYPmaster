@@ -40,11 +40,11 @@ public class AuthenticationServerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AuthenticationServerApplication.class, args);
 		System.out.println("Master server started");
-		KeyPair keypair = KeyGenerator.generateKeys("server");
+//		KeyPair keypair = KeyGenerator.generateKeys("server");
 		
 		if(showKey)
 		System.out.println("Master server Generated Key Pair");
-		dumpKeyPair(keypair);
+//		dumpKeyPair(keypair);
 		
 //		KeyPair keypair2 = KeyGenerator.generateKeys("user");
 //		System.out.println("main Generated Key Pair user");

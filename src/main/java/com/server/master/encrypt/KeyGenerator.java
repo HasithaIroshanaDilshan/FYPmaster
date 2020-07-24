@@ -16,33 +16,33 @@ private static String publickeyPath = "";
 //    }
 
     public static KeyPair generateKeys(String usage) {
-        KeyGenerator keyGenerator = new KeyGenerator();
-        try {
-            if(usage == "user"){
-                privatekeyPath = "D:\\FYP\\user";
-                publickeyPath = "D:\\FYP\\server";
-            }else {
-                privatekeyPath = "D:\\FYP\\server";
-                publickeyPath = "D:\\FYP\\user";
-            }
-            //String path = "D:\\FYP";
-            KeyPairGenerator keyGen = KeyPairGenerator.getInstance("DH");
-            keyGen.initialize(1024);
-            KeyPair generatedKeyPair = keyGen.genKeyPair();
-
-            //System.out.println("Generated Key Pair");
-            //keyGenerator.dumpKeyPair(generatedKeyPair);
-            keyGenerator.SaveKeyPair(generatedKeyPair);
-
-//            KeyPair loadedKeyPair = keyGenerator.LoadKeyPair("DH");
-//            System.out.println("Loaded Key Pair");
-//            keyGenerator.dumpKeyPair(loadedKeyPair);
-            
-            return generatedKeyPair;
-        } catch (Exception e) {
-            e.printStackTrace();
+//        KeyGenerator keyGenerator = new KeyGenerator();
+//        try {
+//            if(usage == "user"){
+//                privatekeyPath = "D:\\FYP\\user";
+//                publickeyPath = "D:\\FYP\\server";
+//            }else {
+//                privatekeyPath = "D:\\FYP\\server";
+//                publickeyPath = "D:\\FYP\\user";
+//            }
+//            //String path = "D:\\FYP";
+//            KeyPairGenerator keyGen = KeyPairGenerator.getInstance("DH");
+//            keyGen.initialize(1024);
+//            KeyPair generatedKeyPair = keyGen.genKeyPair();
+//
+//            //System.out.println("Generated Key Pair");
+//            //keyGenerator.dumpKeyPair(generatedKeyPair);
+//            keyGenerator.SaveKeyPair(generatedKeyPair);
+//
+////            KeyPair loadedKeyPair = keyGenerator.LoadKeyPair("DH");
+////            System.out.println("Loaded Key Pair");
+////            keyGenerator.dumpKeyPair(loadedKeyPair);
+//            
+//            return generatedKeyPair;
+//        } catch (Exception e) {
+//            e.printStackTrace();
             return null;
-        }
+//        }
         
     }
 
