@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.server.master.repository.KeystrokedataRepository;
 import com.server.master.repository.UserRepository;
-
+import com.server.master.models.User;
+import com.server.master.models.Keystrokedata;
 
 @RestController
 public class UserController {

@@ -26,7 +26,7 @@ import com.server.master.repository.UserRepository;
 //import com.fasterxml.jackson.core.JsonProcessingException;
 //import com.fasterxml.jackson.databind.ObjectMapper;
 import com.server.master.models.TrainEntry;
-
+import com.server.master.models.User;
 
 
 

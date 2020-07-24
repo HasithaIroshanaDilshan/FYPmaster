@@ -3,7 +3,7 @@ package com.server.master.repository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import com.server.master.Keystrokedata;
+import com.server.master.models.Keystrokedata;
 
 
 public interface KeystrokedataRepository extends CrudRepository<Keystrokedata, Integer> {
