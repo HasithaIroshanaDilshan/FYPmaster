@@ -32,7 +32,8 @@ public class UserController {
 	@PostMapping("users")
 	public String addUser(@RequestBody User userdata) {
 		System.out.println(userdata.getUsername());
-		userRepository.save(userdata);
+		User u = userRepository.save(userdata);
+		System.out.println(u.getId());
 		return "saved";
 	}
 	
